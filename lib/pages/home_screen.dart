@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kosan_apps/models/city.dart';
 import 'package:kosan_apps/themes.dart';
 import 'package:kosan_apps/widgets/city_card.dart';
 
@@ -39,14 +40,53 @@ class HomeScreen extends StatelessWidget {
               const SizedBox(height: 16),
               Container(
                 height: 150,
-                child: ListView(
+                child: SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
-                  children: [
-                    CityCard(),
-                    CityCard(),
-                    CityCard(),
-                  ],
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: edge),
+                    child: Row(
+                      children: [
+                        CityCard(
+                          City(
+                            id: 1,
+                            name: 'Jakarta',
+                            imageUrl: 'assets/images/img_city_1.png',
+                            isFavorited: false,
+                          ),
+                        ),
+                        const SizedBox(width: 20),
+                        CityCard(
+                          City(
+                            id: 2,
+                            name: 'Bandung',
+                            imageUrl: 'assets/images/img_city_2.png',
+                            isFavorited: true,
+                          ),
+                        ),
+                        const SizedBox(width: 20),
+                        CityCard(
+                          City(
+                            id: 3,
+                            name: 'Surabaya',
+                            imageUrl: 'assets/images/img_city_3.png',
+                            isFavorited: false,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
+                // ListView(
+                //   scrollDirection: Axis.horizontal,
+                //   children: [
+                //     const SizedBox(width: 24),
+                //     CityCard(),
+                //     const SizedBox(width: 20),
+                //     CityCard(),
+                //     const SizedBox(width: 20),
+                //     CityCard(),
+                //   ],
+                // ),
               )
             ],
           ),
