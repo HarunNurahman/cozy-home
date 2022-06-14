@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kosan_apps/models/city.dart';
 import 'package:kosan_apps/themes.dart';
 import 'package:kosan_apps/widgets/city_card.dart';
+import 'package:kosan_apps/widgets/space_card.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -14,6 +15,7 @@ class HomeScreen extends StatelessWidget {
           padding: EdgeInsets.symmetric(vertical: edge),
           child: ListView(
             children: [
+              // HEADER
               Padding(
                 padding: EdgeInsets.only(left: edge),
                 child: Text(
@@ -30,6 +32,7 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 30),
+              // POPULAR CITIES
               Padding(
                 padding: EdgeInsets.only(left: edge),
                 child: Text(
@@ -87,6 +90,21 @@ class HomeScreen extends StatelessWidget {
                 //     CityCard(),
                 //   ],
                 // ),
+              ),
+              const SizedBox(height: 30),
+              // RECOMMENDED SPACE
+              Padding(
+                padding: EdgeInsets.only(left: edge),
+                child: Text(
+                  'Recommended Space',
+                  style: regularTextStyle.copyWith(fontSize: 16),
+                ),
+              ),
+              const SizedBox(height: 16),
+              Column(
+                children: [
+                  SpaceCard(),
+                ],
               )
             ],
           ),
