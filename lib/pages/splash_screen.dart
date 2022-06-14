@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kosan_apps/pages/home_screen.dart';
 import 'package:kosan_apps/themes.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -46,7 +47,14 @@ class SplashScreen extends StatelessWidget {
                     width: 210,
                     height: 50,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => HomeScreen(),
+                          ),
+                        );
+                      },
                       style: ElevatedButton.styleFrom(
                         primary: purpleColor,
                         shape: RoundedRectangleBorder(
