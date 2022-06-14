@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kosan_apps/themes.dart';
+import 'package:kosan_apps/widgets/city_card.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -28,6 +29,25 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 30),
+              Padding(
+                padding: EdgeInsets.only(left: edge),
+                child: Text(
+                  'Popular Cities',
+                  style: regularTextStyle.copyWith(fontSize: 16),
+                ),
+              ),
+              const SizedBox(height: 16),
+              Container(
+                height: 150,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: [
+                    CityCard(),
+                    CityCard(),
+                    CityCard(),
+                  ],
+                ),
+              )
             ],
           ),
         ),
