@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:kosan_apps/models/city.dart';
 import 'package:kosan_apps/models/spaces.dart';
+import 'package:kosan_apps/models/tips.dart';
 import 'package:kosan_apps/themes.dart';
 import 'package:kosan_apps/widgets/city_card.dart';
 import 'package:kosan_apps/widgets/space_card.dart';
+import 'package:kosan_apps/widgets/tips_card.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -140,6 +142,40 @@ class HomeScreen extends StatelessWidget {
                         imageUrl: 'assets/images/img_space_3.png',
                         city: 'Jakarta Selatan',
                         country: 'Indonesia',
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 30),
+              // TIPS & GUIDANCES
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: edge),
+                child: Text(
+                  'Tips & Guidance',
+                  style: blackTextStyle.copyWith(fontSize: 16),
+                ),
+              ),
+              const SizedBox(height: 16),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: edge),
+                child: Column(
+                  children: [
+                    TipsCard(
+                      Tips(
+                        id: 1,
+                        name: 'City Guidelines',
+                        update: '15/06/2022',
+                        imageUrl: 'assets/images/img_tips_1.png',
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    TipsCard(
+                      Tips(
+                        id: 2,
+                        name: 'Amusement Park List',
+                        update: '21/01/2022',
+                        imageUrl: 'assets/images/img_tips_2.png',
                       ),
                     ),
                   ],
