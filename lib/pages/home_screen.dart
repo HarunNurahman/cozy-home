@@ -11,6 +11,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
+        bottom: false,
         child: Padding(
           padding: EdgeInsets.symmetric(vertical: edge),
           child: ListView(
@@ -103,6 +104,10 @@ class HomeScreen extends StatelessWidget {
               const SizedBox(height: 16),
               Column(
                 children: [
+                  SpaceCard(),
+                  const SizedBox(height: 30),
+                  SpaceCard(),
+                  const SizedBox(height: 30),
                   SpaceCard(),
                 ],
               )
