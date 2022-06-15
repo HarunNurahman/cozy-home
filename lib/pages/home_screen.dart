@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kosan_apps/models/city.dart';
+import 'package:kosan_apps/models/spaces.dart';
 import 'package:kosan_apps/themes.dart';
 import 'package:kosan_apps/widgets/city_card.dart';
 import 'package:kosan_apps/widgets/space_card.dart';
@@ -102,14 +103,47 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 16),
-              Column(
-                children: [
-                  SpaceCard(),
-                  const SizedBox(height: 30),
-                  SpaceCard(),
-                  const SizedBox(height: 30),
-                  SpaceCard(),
-                ],
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: edge),
+                child: Column(
+                  children: [
+                    SpaceCard(
+                      Spaces(
+                        id: 1,
+                        rating: 4,
+                        price: 80,
+                        name: 'Kuretakeso Hott',
+                        imageUrl: 'assets/images/img_space_1.png',
+                        city: 'Kota Bandung',
+                        country: 'Indonesia',
+                      ),
+                    ),
+                    const SizedBox(height: 30),
+                    SpaceCard(
+                      Spaces(
+                        id: 2,
+                        rating: 4,
+                        price: 50,
+                        name: 'Roemah Nenek',
+                        imageUrl: 'assets/images/img_space_2.png',
+                        city: 'Yogyakarta',
+                        country: 'Indonesia',
+                      ),
+                    ),
+                    const SizedBox(height: 30),
+                    SpaceCard(
+                      Spaces(
+                        id: 3,
+                        rating: 3,
+                        price: 100,
+                        name: 'Greenhouse Jakarta',
+                        imageUrl: 'assets/images/img_space_3.png',
+                        city: 'Jakarta Selatan',
+                        country: 'Indonesia',
+                      ),
+                    ),
+                  ],
+                ),
               )
             ],
           ),
