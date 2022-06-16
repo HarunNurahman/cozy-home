@@ -138,7 +138,7 @@ class HomeScreen extends StatelessWidget {
                       id: 3,
                       rating: 3,
                       price: 100,
-                      name: 'Greenhouse Jakarta',
+                      name: 'Darrling How',
                       imageUrl: 'assets/images/img_space_3.png',
                       city: 'Jakarta Selatan',
                       country: 'Indonesia',
@@ -173,7 +173,7 @@ class HomeScreen extends StatelessWidget {
                   TipsCard(
                     Tips(
                       id: 2,
-                      name: 'Amusement Park List',
+                      name: 'Resident Registration',
                       update: '21/01/2022',
                       imageUrl: 'assets/images/img_tips_2.png',
                     ),

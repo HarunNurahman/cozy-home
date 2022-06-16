@@ -59,17 +59,17 @@ class SpaceCard extends StatelessWidget {
           children: [
             Text(
               spaces.name,
-              style: blackTextStyle.copyWith(fontSize: 18),
+              style: blackTextStyle.copyWith(fontSize: 16),
             ),
             const SizedBox(height: 2),
             RichText(
               text: TextSpan(
                 text: '\$${spaces.price}',
-                style: purpleTextStyle.copyWith(fontSize: 14),
+                style: purpleTextStyle.copyWith(fontSize: 12),
                 children: [
                   TextSpan(
                     text: '/month',
-                    style: greyTextStyle.copyWith(fontSize: 14),
+                    style: greyTextStyle.copyWith(fontSize: 12),
                   ),
                 ],
               ),
@@ -77,7 +77,7 @@ class SpaceCard extends StatelessWidget {
             const SizedBox(height: 16),
             Text(
               '${spaces.city}, ${spaces.country}',
-              style: greyTextStyle.copyWith(fontSize: 14),
+              style: greyTextStyle.copyWith(fontSize: 12),
             )
           ],
         )

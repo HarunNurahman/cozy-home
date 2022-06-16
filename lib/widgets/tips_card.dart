@@ -21,12 +21,12 @@ class TipsCard extends StatelessWidget {
           children: [
             Text(
               tips.name,
-              style: blackTextStyle.copyWith(fontSize: 18),
+              style: blackTextStyle.copyWith(fontSize: 16),
             ),
             const SizedBox(height: 4),
             Text(
               'Updated ${tips.update}',
-              style: greyTextStyle,
+              style: greyTextStyle.copyWith(fontSize: 12),
             ),
           ],
         ),
