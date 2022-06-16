@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kosan_apps/themes.dart';
 import 'package:kosan_apps/widgets/facility_item.dart';
+import 'package:kosan_apps/widgets/list_photo.dart';
 
 class DetailScreen extends StatelessWidget {
   const DetailScreen({Key? key}) : super(key: key);
@@ -36,116 +37,177 @@ class DetailScreen extends StatelessWidget {
                 ],
               ),
             ),
-            ListView(
-              children: [
-                const SizedBox(height: 330),
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(20),
+            SingleChildScrollView(
+              child: Column(
+                children: [
+                  const SizedBox(height: 330),
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(20),
+                      ),
+                      color: whiteColor,
                     ),
-                    color: whiteColor,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(height: 30),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: edge),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(height: 30),
+                        placeHeader(),
+                        const SizedBox(height: 30),
+                        Padding(
+                          padding: EdgeInsets.only(left: edge),
+                          child: Text(
+                            'Main Facilities',
+                            style: regularTextStyle.copyWith(fontSize: 16),
+                          ),
+                        ),
+                        const SizedBox(height: 12),
+                        mainFacility(),
+                        const SizedBox(height: 30),
+                        Padding(
+                          padding: EdgeInsets.only(left: edge),
+                          child: Text(
+                            'Photos',
+                            style: regularTextStyle.copyWith(fontSize: 16),
+                          ),
+                        ),
+                        const SizedBox(height: 12),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: edge),
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
                               children: [
-                                Text(
-                                  'Kuretakeso Hott',
-                                  style: blackTextStyle.copyWith(fontSize: 20),
+                                ListPhoto(
+                                  imageUrl: 'assets/images/img_detailpic_1.png',
                                 ),
-                                const SizedBox(height: 2),
-                                RichText(
-                                  text: TextSpan(
-                                    text: '\$52',
-                                    style: purpleTextStyle.copyWith(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                    children: [
-                                      TextSpan(
-                                        text: '/month',
-                                        style: greyTextStyle.copyWith(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w300,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
+                                const SizedBox(width: 18),
+                                ListPhoto(
+                                  imageUrl: 'assets/images/img_detailpic_2.png',
                                 ),
+                                const SizedBox(width: 18),
+                                ListPhoto(
+                                  imageUrl: 'assets/images/img_detailpic_3.png',
+                                ),
+                                const SizedBox(width: 18),
                               ],
                             ),
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.star,
-                                  color: orangeColor,
-                                  size: 20,
-                                ),
-                                const SizedBox(width: 2),
-                                Icon(
-                                  Icons.star,
-                                  color: orangeColor,
-                                  size: 20,
-                                ),
-                                const SizedBox(width: 2),
-                                Icon(
-                                  Icons.star,
-                                  color: orangeColor,
-                                  size: 20,
-                                ),
-                                const SizedBox(width: 2),
-                                Icon(
-                                  Icons.star,
-                                  color: orangeColor,
-                                  size: 20,
-                                ),
-                                const SizedBox(width: 2),
-                                Icon(
-                                  Icons.star,
-                                  color: Color(0xFF989BA1),
-                                  size: 20,
-                                ),
-                              ],
-                            ),
-                          ],
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 30),
-                      Padding(
-                        padding: EdgeInsets.only(left: edge),
-                        child: Text(
-                          'Main Facilities',
-                          style: regularTextStyle.copyWith(fontSize: 16),
-                        ),
-                      ),
-                      const SizedBox(height: 12),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: edge),
-                        child: Row(
-                          children: [
-                            FacilityItem(),
-                          ],
-                        ),
-                      )
-                    ],
+                        const SizedBox(height: 40),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ],
         ),
       ),
     );
   }
-}
 
+  Padding placeHeader() {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: edge),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Kuretakeso Hott',
+                style: blackTextStyle.copyWith(fontSize: 20),
+              ),
+              const SizedBox(height: 2),
+              RichText(
+                text: TextSpan(
+                  text: '\$52',
+                  style: purpleTextStyle.copyWith(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
+                  children: [
+                    TextSpan(
+                      text: '/month',
+                      style: greyTextStyle.copyWith(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w300,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              Icon(
+                Icons.star,
+                color: orangeColor,
+                size: 20,
+              ),
+              const SizedBox(width: 2),
+              Icon(
+                Icons.star,
+                color: orangeColor,
+                size: 20,
+              ),
+              const SizedBox(width: 2),
+              Icon(
+                Icons.star,
+                color: orangeColor,
+                size: 20,
+              ),
+              const SizedBox(width: 2),
+              Icon(
+                Icons.star,
+                color: orangeColor,
+                size: 20,
+              ),
+              const SizedBox(width: 2),
+              Icon(
+                Icons.star,
+                color: Color(0xFF989BA1),
+                size: 20,
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Padding mainFacility() {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: edge),
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          children: [
+            FacilityItem(
+              name: 'Kitchens',
+              imageUrl: 'assets/icons/ic_kitchenbar.png',
+              total: '2',
+            ),
+            const SizedBox(width: 30),
+            FacilityItem(
+              name: 'Bedrooms',
+              imageUrl: 'assets/icons/ic_bedroom.png',
+              total: '3',
+            ),
+            const SizedBox(width: 30),
+            FacilityItem(
+              name: 'Wardrobes',
+              imageUrl: 'assets/icons/ic_wardrobe.png',
+              total: '2',
+            ),
+            const SizedBox(width: 30),
+          ],
+        ),
+      ),
+    );
+  }
+}

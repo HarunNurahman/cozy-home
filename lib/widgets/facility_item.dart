@@ -1,20 +1,45 @@
 import 'package:flutter/material.dart';
+import 'package:kosan_apps/themes.dart';
 
 class FacilityItem extends StatelessWidget {
-  const FacilityItem({Key? key}) : super(key: key);
+  final String name;
+  final String imageUrl;
+  final String total;
+
+  FacilityItem({
+    required this.name,
+    required this.imageUrl,
+    required this.total,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          children: [
-            Image.asset(
-              'assets/icons/ic_kitchenbar.png',
-              width: 32,
+        Image.asset(
+          imageUrl,
+          width: 32,
+        ),
+        const SizedBox(height: 8),
+        RichText(
+          text: TextSpan(
+            text: '$total',
+            style: purpleTextStyle.copyWith(
+              fontSize: 14,
+              fontWeight: FontWeight.w500,
             ),
-          ],
-        )
+            children: [
+              TextSpan(
+                text: ' $name',
+                style: greyTextStyle.copyWith(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w300,
+                ),
+              ),
+            ],
+          ),
+        ),
       ],
     );
   }
