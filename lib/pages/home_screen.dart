@@ -173,7 +173,7 @@ class HomeScreen extends StatelessWidget {
                   TipsCard(
                     Tips(
                       id: 2,
-                      name: 'Resident Registration',
+                      name: 'Civil Registration',
                       update: '21/01/2022',
                       imageUrl: 'assets/images/img_tips_2.png',
                     ),
