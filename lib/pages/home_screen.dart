@@ -45,56 +45,7 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16),
-            Container(
-              height: 150,
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: edge),
-                  child: Row(
-                    children: [
-                      CityCard(
-                        City(
-                          id: 1,
-                          name: 'Jakarta',
-                          imageUrl: 'assets/images/img_city_1.png',
-                          isFavorited: false,
-                        ),
-                      ),
-                      const SizedBox(width: 20),
-                      CityCard(
-                        City(
-                          id: 2,
-                          name: 'Bandung',
-                          imageUrl: 'assets/images/img_city_2.png',
-                          isFavorited: true,
-                        ),
-                      ),
-                      const SizedBox(width: 20),
-                      CityCard(
-                        City(
-                          id: 3,
-                          name: 'Surabaya',
-                          imageUrl: 'assets/images/img_city_3.png',
-                          isFavorited: false,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              // ListView(
-              //   scrollDirection: Axis.horizontal,
-              //   children: [
-              //     const SizedBox(width: 24),
-              //     CityCard(),
-              //     const SizedBox(width: 20),
-              //     CityCard(),
-              //     const SizedBox(width: 20),
-              //     CityCard(),
-              //   ],
-              // ),
-            ),
+            popularCities(),
             const SizedBox(height: 30),
             // RECOMMENDED SPACE
             Padding(
@@ -105,48 +56,7 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: edge),
-              child: Column(
-                children: [
-                  SpaceCard(
-                    Spaces(
-                      id: 1,
-                      rating: 4,
-                      price: 80,
-                      name: 'Kuretakeso Hott',
-                      imageUrl: 'assets/images/img_space_1.png',
-                      city: 'Kota Bandung',
-                      country: 'Indonesia',
-                    ),
-                  ),
-                  const SizedBox(height: 30),
-                  SpaceCard(
-                    Spaces(
-                      id: 2,
-                      rating: 4,
-                      price: 50,
-                      name: 'Roemah Nenek',
-                      imageUrl: 'assets/images/img_space_2.png',
-                      city: 'Yogyakarta',
-                      country: 'Indonesia',
-                    ),
-                  ),
-                  const SizedBox(height: 30),
-                  SpaceCard(
-                    Spaces(
-                      id: 3,
-                      rating: 3,
-                      price: 100,
-                      name: 'Darrling How',
-                      imageUrl: 'assets/images/img_space_3.png',
-                      city: 'Jakarta Selatan',
-                      country: 'Indonesia',
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            recommendedSpaces(),
             const SizedBox(height: 30),
             // TIPS & GUIDANCES
             Padding(
@@ -157,65 +67,171 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: edge),
-              child: Column(
-                children: [
-                  TipsCard(
-                    Tips(
-                      id: 1,
-                      name: 'City Guidelines',
-                      update: '15/06/2022',
-                      imageUrl: 'assets/images/img_tips_1.png',
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  TipsCard(
-                    Tips(
-                      id: 2,
-                      name: 'Civil Registration',
-                      update: '21/01/2022',
-                      imageUrl: 'assets/images/img_tips_2.png',
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            tips(),
             SizedBox(height: 70 + edge),
           ],
         ),
       ),
-      floatingActionButton: Container(
-        height: 65,
-        width: MediaQuery.of(context).size.width - (2 * edge),
-        margin: EdgeInsets.symmetric(horizontal: edge),
-        decoration: BoxDecoration(
-          color: const Color(0xFFF6F7F8),
-          borderRadius: BorderRadius.circular(23),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            BottomNavBarItem(
-              imageUrl: 'assets/icons/ic_home_active.png',
-              isSelected: true,
+      floatingActionButton: bottomNavBar(context),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+    );
+  }
+
+  Container bottomNavBar(BuildContext context) {
+    return Container(
+      height: 65,
+      width: MediaQuery.of(context).size.width - (2 * edge),
+      margin: EdgeInsets.symmetric(horizontal: edge),
+      decoration: BoxDecoration(
+        color: const Color(0xFFF6F7F8),
+        borderRadius: BorderRadius.circular(23),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          BottomNavBarItem(
+            imageUrl: 'assets/icons/ic_home_active.png',
+            isSelected: true,
+          ),
+          BottomNavBarItem(
+            imageUrl: 'assets/icons/ic_message.png',
+            isSelected: false,
+          ),
+          BottomNavBarItem(
+            imageUrl: 'assets/icons/ic_payment.png',
+            isSelected: false,
+          ),
+          BottomNavBarItem(
+            imageUrl: 'assets/icons/ic_favorited.png',
+            isSelected: false,
+          )
+        ],
+      ),
+    );
+  }
+
+  Padding tips() {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: edge),
+      child: Column(
+        children: [
+          TipsCard(
+            Tips(
+              id: 1,
+              name: 'City Guidelines',
+              update: '15/06/2022',
+              imageUrl: 'assets/images/img_tips_1.png',
             ),
-            BottomNavBarItem(
-              imageUrl: 'assets/icons/ic_message.png',
-              isSelected: false,
+          ),
+          const SizedBox(height: 20),
+          TipsCard(
+            Tips(
+              id: 2,
+              name: 'Civil Registration',
+              update: '21/01/2022',
+              imageUrl: 'assets/images/img_tips_2.png',
             ),
-            BottomNavBarItem(
-              imageUrl: 'assets/icons/ic_payment.png',
-              isSelected: false,
+          ),
+        ],
             ),
-            BottomNavBarItem(
-              imageUrl: 'assets/icons/ic_favorited.png',
-              isSelected: false,
-            )
-          ],
+    );
+  }
+
+  Padding recommendedSpaces() {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: edge),
+      child: Column(
+        children: [
+          SpaceCard(
+            Spaces(
+              id: 1,
+              rating: 4,
+              price: 80,
+              name: 'Kuretakeso Hott',
+              imageUrl: 'assets/images/img_space_1.png',
+              city: 'Kota Bandung',
+              country: 'Indonesia',
+            ),
+          ),
+          const SizedBox(height: 30),
+          SpaceCard(
+            Spaces(
+              id: 2,
+              rating: 4,
+              price: 50,
+              name: 'Roemah Nenek',
+              imageUrl: 'assets/images/img_space_2.png',
+              city: 'Yogyakarta',
+              country: 'Indonesia',
+            ),
+          ),
+          const SizedBox(height: 30),
+          SpaceCard(
+            Spaces(
+              id: 3,
+              rating: 3,
+              price: 100,
+              name: 'Darrling How',
+              imageUrl: 'assets/images/img_space_3.png',
+              city: 'Jakarta Selatan',
+              country: 'Indonesia',
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Container popularCities() {
+    return Container(
+      height: 150,
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: edge),
+          child: Row(
+            children: [
+              CityCard(
+                City(
+                  id: 1,
+                  name: 'Jakarta',
+                  imageUrl: 'assets/images/img_city_1.png',
+                  isFavorited: false,
+                ),
+              ),
+              const SizedBox(width: 20),
+              CityCard(
+                City(
+                  id: 2,
+                  name: 'Bandung',
+                  imageUrl: 'assets/images/img_city_2.png',
+                  isFavorited: true,
+                ),
+              ),
+              const SizedBox(width: 20),
+              CityCard(
+                City(
+                  id: 3,
+                  name: 'Surabaya',
+                  imageUrl: 'assets/images/img_city_3.png',
+                  isFavorited: false,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      // ListView(
+      //   scrollDirection: Axis.horizontal,
+      //   children: [
+      //     const SizedBox(width: 24),
+      //     CityCard(),
+      //     const SizedBox(width: 20),
+      //     CityCard(),
+      //     const SizedBox(width: 20),
+      //     CityCard(),
+      //   ],
+      // ),
     );
   }
 }

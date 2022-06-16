@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kosan_apps/themes.dart';
+import 'package:kosan_apps/widgets/facility_item.dart';
 
 class DetailScreen extends StatelessWidget {
   const DetailScreen({Key? key}) : super(key: key);
@@ -47,6 +48,7 @@ class DetailScreen extends StatelessWidget {
                     color: whiteColor,
                   ),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const SizedBox(height: 30),
                       Padding(
@@ -115,6 +117,23 @@ class DetailScreen extends StatelessWidget {
                                 ),
                               ],
                             ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 30),
+                      Padding(
+                        padding: EdgeInsets.only(left: edge),
+                        child: Text(
+                          'Main Facilities',
+                          style: regularTextStyle.copyWith(fontSize: 16),
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: edge),
+                        child: Row(
+                          children: [
+                            FacilityItem(),
                           ],
                         ),
                       )
