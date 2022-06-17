@@ -9,6 +9,7 @@ class DetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: whiteColor,
       body: SafeArea(
         bottom: false,
         child: Stack(
@@ -17,25 +18,6 @@ class DetailScreen extends StatelessWidget {
               'assets/images/img_cover.png',
               height: 350,
               width: MediaQuery.of(context).size.width,
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 30, horizontal: edge),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  InkWell(
-                    onTap: (() => Navigator.pop(context)),
-                    child: Image.asset(
-                      'assets/images/btn_back.png',
-                      width: 40,
-                    ),
-                  ),
-                  Image.asset(
-                    'assets/images/btn_wishlist.png',
-                    width: 40,
-                  ),
-                ],
-              ),
             ),
             SingleChildScrollView(
               child: Column(
@@ -73,25 +55,33 @@ class DetailScreen extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 12),
+                        detailPic(),
+                        const SizedBox(height: 30),
                         Padding(
-                          padding: EdgeInsets.symmetric(horizontal: edge),
-                          child: SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              children: [
-                                ListPhoto(
-                                  imageUrl: 'assets/images/img_detailpic_1.png',
-                                ),
-                                const SizedBox(width: 18),
-                                ListPhoto(
-                                  imageUrl: 'assets/images/img_detailpic_2.png',
-                                ),
-                                const SizedBox(width: 18),
-                                ListPhoto(
-                                  imageUrl: 'assets/images/img_detailpic_3.png',
-                                ),
-                                const SizedBox(width: 18),
-                              ],
+                          padding: EdgeInsets.only(left: edge),
+                          child: Text(
+                            'Location',
+                            style: regularTextStyle.copyWith(fontSize: 16),
+                          ),
+                        ),
+                        const SizedBox(height: 6),
+                        location(),
+                        const SizedBox(height: 40),
+                        Container(
+                          margin: EdgeInsets.symmetric(horizontal: edge),
+                          height: 50,
+                          width: MediaQuery.of(context).size.width - (2 * edge),
+                          child: ElevatedButton(
+                            onPressed: () {},
+                            style: ElevatedButton.styleFrom(
+                              primary: purpleColor,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(17),
+                              ),
+                            ),
+                            child: Text(
+                              'Book Now',
+                              style: whiteTextStyle.copyWith(fontSize: 18),
                             ),
                           ),
                         ),
@@ -102,6 +92,85 @@ class DetailScreen extends StatelessWidget {
                 ],
               ),
             ),
+            topButton(context),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Padding topButton(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 30, horizontal: edge),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          InkWell(
+            onTap: (() => Navigator.pop(context)),
+            child: Image.asset(
+              'assets/images/btn_back.png',
+              width: 40,
+            ),
+          ),
+          Image.asset(
+            'assets/images/btn_wishlist.png',
+            width: 40,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Padding location() {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: edge),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            'Jalan Kappan Sukses No. 20\nPalembang',
+            style: greyTextStyle.copyWith(fontSize: 14),
+          ),
+          InkWell(
+            onTap: () {},
+            child: Container(
+              width: 40,
+              height: 40,
+              decoration: BoxDecoration(
+                color: Color(0xFFF6F7F8),
+                shape: BoxShape.circle,
+              ),
+              child: Icon(
+                Icons.location_on,
+                size: 22,
+                color: Color(0xFF989BA1),
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Padding detailPic() {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: edge),
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          children: [
+            ListPhoto(
+              imageUrl: 'assets/images/img_detailpic_1.png',
+            ),
+            const SizedBox(width: 18),
+            ListPhoto(
+              imageUrl: 'assets/images/img_detailpic_2.png',
+            ),
+            const SizedBox(width: 18),
+            ListPhoto(
+              imageUrl: 'assets/images/img_detailpic_3.png',
+            ),
+            const SizedBox(width: 18),
           ],
         ),
       ),
