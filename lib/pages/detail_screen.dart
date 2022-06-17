@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kosan_apps/pages/error_screen.dart';
 import 'package:kosan_apps/themes.dart';
 import 'package:kosan_apps/widgets/facility_item.dart';
 import 'package:kosan_apps/widgets/list_photo.dart';
@@ -73,7 +74,7 @@ class DetailScreen extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 6),
-                        location(),
+                        location(context),
                         const SizedBox(height: 40),
                         Container(
                           margin: EdgeInsets.symmetric(horizontal: edge),
@@ -129,10 +130,23 @@ class DetailScreen extends StatelessWidget {
     );
   }
 
-  Padding location() {
+  Padding location(BuildContext context) {
     _launchUrl(String url) async {
-      if (!await launchUrlString(url)) throw 'Could not launch $url';
+      // if (!await launchUrlString(url)) throw 'Could not launch $url';
+      if (await canLaunchUrlString(url)) {
+        launchUrlString(url);
+      } else {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return EmptyState();
+            },
+          ),
+        );
+      }
     }
+
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: edge),
       child: Row(
@@ -144,7 +158,7 @@ class DetailScreen extends StatelessWidget {
           ),
           InkWell(
             onTap: () {
-              _launchUrl('https://goo.gl/maps/y1UeZFGt4wY4Enpu6');
+              _launchUrl('qqq');
             },
             child: Container(
               width: 40,
@@ -250,7 +264,7 @@ class DetailScreen extends StatelessWidget {
                 size: 20,
               ),
               const SizedBox(width: 2),
-              Icon(
+              const Icon(
                 Icons.star,
                 color: Color(0xFF989BA1),
                 size: 20,
