@@ -158,7 +158,7 @@ class DetailScreen extends StatelessWidget {
           ),
           InkWell(
             onTap: () {
-              _launchUrl('qqq');
+              _launchUrl('qq');
             },
             child: Container(
               width: 40,
