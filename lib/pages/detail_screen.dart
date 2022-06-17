@@ -2,9 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:kosan_apps/themes.dart';
 import 'package:kosan_apps/widgets/facility_item.dart';
 import 'package:kosan_apps/widgets/list_photo.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class DetailScreen extends StatelessWidget {
-  const DetailScreen({Key? key}) : super(key: key);
+  DetailScreen({Key? key}) : super(key: key);
+
+  // final Uri _url = Uri.parse('https://goo.gl/maps/y1UeZFGt4wY4Enpu6');
+
+  // void _launchUrl() async {
+  //   if (!await launchUrl(_url)) throw 'Could not launch $_url';
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -122,6 +130,9 @@ class DetailScreen extends StatelessWidget {
   }
 
   Padding location() {
+    _launchUrl(String url) async {
+      if (!await launchUrlString(url)) throw 'Could not launch $url';
+    }
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: edge),
       child: Row(
@@ -132,7 +143,9 @@ class DetailScreen extends StatelessWidget {
             style: greyTextStyle.copyWith(fontSize: 14),
           ),
           InkWell(
-            onTap: () {},
+            onTap: () {
+              _launchUrl('https://goo.gl/maps/y1UeZFGt4wY4Enpu6');
+            },
             child: Container(
               width: 40,
               height: 40,
