@@ -30,6 +30,7 @@ class DetailScreen extends StatelessWidget {
               spaces.imageUrl,
               height: 350,
               width: MediaQuery.of(context).size.width,
+              fit: BoxFit.cover,
             ),
             SingleChildScrollView(
               child: Column(
@@ -182,39 +183,36 @@ class DetailScreen extends StatelessWidget {
     );
   }
 
-  Padding detailPic() {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: edge),
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: Row(
-          children: spaces.photos.map((item) {
-            return Container(
-              margin: EdgeInsets.only(left: edge),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(16),
-                child: Image.network(
-                  item,
-                  width: 88,
-                  height: 110,
-                  fit: BoxFit.cover,
-                ),
+  SingleChildScrollView detailPic() {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: spaces.photos.map((item) {
+          return Container(
+            margin: EdgeInsets.only(left: edge),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(16),
+              child: Image.network(
+                item,
+                width: 110,
+                height: 88,
+                fit: BoxFit.cover,
               ),
-            );
-          }).toList(),
-          // ListPhoto(
-          //   imageUrl: 'assets/images/img_detailpic_1.png',
-          // ),
-          // const SizedBox(width: 18),
-          // ListPhoto(
-          //   imageUrl: 'assets/images/img_detailpic_2.png',
-          // ),
-          // const SizedBox(width: 18),
-          // ListPhoto(
-          //   imageUrl: 'assets/images/img_detailpic_3.png',
-          // ),
-          // const SizedBox(width: 18),
-        ),
+            ),
+          );
+        }).toList(),
+        // ListPhoto(
+        //   imageUrl: 'assets/images/img_detailpic_1.png',
+        // ),
+        // const SizedBox(width: 18),
+        // ListPhoto(
+        //   imageUrl: 'assets/images/img_detailpic_2.png',
+        // ),
+        // const SizedBox(width: 18),
+        // ListPhoto(
+        //   imageUrl: 'assets/images/img_detailpic_3.png',
+        // ),
+        // const SizedBox(width: 18),
       ),
     );
   }
