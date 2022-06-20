@@ -12,8 +12,8 @@ class Spaces {
   late String phone;
   late String mapUrl;
   late List photos;
-  late int numberOfKitchen;
-  late int numberOfBedroom;
+  late int numberOfKitchens;
+  late int numberOfBedrooms;
   late int numberOfCupboards;
 
   Spaces({
@@ -28,8 +28,8 @@ class Spaces {
     required this.phone,
     required this.mapUrl,
     required this.photos,
-    required this.numberOfKitchen,
-    required this.numberOfBedroom,
+    required this.numberOfKitchens,
+    required this.numberOfBedrooms,
     required this.numberOfCupboards,
   });
 
@@ -45,8 +45,8 @@ class Spaces {
     phone = json['phone'];
     mapUrl = json['map_url'];
     photos = json['photos'];
-    numberOfKitchen = json['number_of_kitchen'];
-    numberOfBedroom = json['number_of_bedroom'];
-    numberOfCupboards = json['number_of_cupboard'];
+    numberOfKitchens = json['number_of_kitchens'];
+    numberOfBedrooms = json['number_of_bedrooms'];
+    numberOfCupboards = json['number_of_cupboards'];
   }
 }

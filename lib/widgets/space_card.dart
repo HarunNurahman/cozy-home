@@ -14,7 +14,7 @@ class SpaceCard extends StatelessWidget {
       onTap: () => Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => DetailScreen(),
+          builder: (context) => DetailScreen(spaces),
         ),
       ),
       child: Row(

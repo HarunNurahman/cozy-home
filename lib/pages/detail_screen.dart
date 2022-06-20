@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kosan_apps/models/spaces.dart';
 import 'package:kosan_apps/pages/error_screen.dart';
 import 'package:kosan_apps/themes.dart';
 import 'package:kosan_apps/widgets/facility_item.dart';
@@ -7,13 +8,15 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 class DetailScreen extends StatelessWidget {
-  DetailScreen({Key? key}) : super(key: key);
-
   // final Uri _url = Uri.parse('https://goo.gl/maps/y1UeZFGt4wY4Enpu6');
 
   // void _launchUrl() async {
   //   if (!await launchUrl(_url)) throw 'Could not launch $_url';
   // }
+
+  final Spaces spaces;
+
+  DetailScreen(this.spaces);
 
   @override
   Widget build(BuildContext context) {
@@ -23,8 +26,8 @@ class DetailScreen extends StatelessWidget {
         bottom: false,
         child: Stack(
           children: [
-            Image.asset(
-              'assets/images/img_cover.png',
+            Image.network(
+              spaces.imageUrl,
               height: 350,
               width: MediaQuery.of(context).size.width,
             ),
@@ -153,12 +156,12 @@ class DetailScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            'Jalan Kappan Sukses No. 20\nPalembang',
+            '${spaces.address}\n${spaces.city}',
             style: greyTextStyle.copyWith(fontSize: 14),
           ),
           InkWell(
             onTap: () {
-              _launchUrl('qq');
+              _launchUrl(spaces.mapUrl);
             },
             child: Container(
               width: 40,
@@ -185,20 +188,32 @@ class DetailScreen extends StatelessWidget {
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Row(
-          children: [
-            ListPhoto(
-              imageUrl: 'assets/images/img_detailpic_1.png',
-            ),
-            const SizedBox(width: 18),
-            ListPhoto(
-              imageUrl: 'assets/images/img_detailpic_2.png',
-            ),
-            const SizedBox(width: 18),
-            ListPhoto(
-              imageUrl: 'assets/images/img_detailpic_3.png',
-            ),
-            const SizedBox(width: 18),
-          ],
+          children: spaces.photos.map((item) {
+            return Container(
+              margin: EdgeInsets.only(left: edge),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(16),
+                child: Image.network(
+                  item,
+                  width: 110,
+                  height: 88,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            );
+          }).toList(),
+          // ListPhoto(
+          //   imageUrl: 'assets/images/img_detailpic_1.png',
+          // ),
+          // const SizedBox(width: 18),
+          // ListPhoto(
+          //   imageUrl: 'assets/images/img_detailpic_2.png',
+          // ),
+          // const SizedBox(width: 18),
+          // ListPhoto(
+          //   imageUrl: 'assets/images/img_detailpic_3.png',
+          // ),
+          // const SizedBox(width: 18),
         ),
       ),
     );
@@ -214,13 +229,13 @@ class DetailScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Kuretakeso Hott',
+                spaces.name,
                 style: blackTextStyle.copyWith(fontSize: 20),
               ),
               const SizedBox(height: 2),
               RichText(
                 text: TextSpan(
-                  text: '\$52',
+                  text: '\$${spaces.price}',
                   style: purpleTextStyle.copyWith(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
@@ -286,19 +301,19 @@ class DetailScreen extends StatelessWidget {
             FacilityItem(
               name: 'Kitchens',
               imageUrl: 'assets/icons/ic_kitchenbar.png',
-              total: '2',
+              total: spaces.numberOfKitchens.toString(),
             ),
             const SizedBox(width: 30),
             FacilityItem(
               name: 'Bedrooms',
               imageUrl: 'assets/icons/ic_bedroom.png',
-              total: '3',
+              total: spaces.numberOfBedrooms.toString(),
             ),
             const SizedBox(width: 30),
             FacilityItem(
               name: 'Wardrobes',
               imageUrl: 'assets/icons/ic_wardrobe.png',
-              total: '2',
+              total: spaces.numberOfCupboards.toString(),
             ),
             const SizedBox(width: 30),
           ],

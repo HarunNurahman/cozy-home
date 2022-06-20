@@ -74,50 +74,15 @@ class HomeScreen extends StatelessWidget {
                             margin: EdgeInsets.only(top: index == 1 ? 0 : 30),
                             child: SpaceCard(item),
                           );
-                        }).toList(),
-                        // children: [
-                        //   SpaceCard(
-                        //     Spaces(
-                        //       id: 1,
-                        //       rating: 4,
-                        //       price: 80,
-                        //       name: 'Kuretakeso Hott',
-                        //       imageUrl: 'assets/images/img_space_1.png',
-                        //       city: 'Kota Bandung',
-                        //       country: 'Indonesia',
-                        //     ),
-                        //   ),
-                        //   const SizedBox(height: 30),
-                        //   SpaceCard(
-                        //     Spaces(
-                        //       id: 2,
-                        //       rating: 4,
-                        //       price: 50,
-                        //       name: 'Roemah Nenek',
-                        //       imageUrl: 'assets/images/img_space_2.png',
-                        //       city: 'Yogyakarta',
-                        //       country: 'Indonesia',
-                        //     ),
-                        //   ),
-                        //   const SizedBox(height: 30),
-                        //   SpaceCard(
-                        //     Spaces(
-                        //       id: 3,
-                        //       rating: 3,
-                        //       price: 100,
-                        //       name: 'Darrling How',
-                        //       imageUrl: 'assets/images/img_space_3.png',
-                        //       city: 'Jakarta Selatan',
-                        //       country: 'Indonesia',
-                        //     ),
-                        //   ),
-                        // ],
+                        },
+                      ).toList(),
                       );
                     }
-                    return Center(
+                  return Center(
                       child: CircularProgressIndicator(),
                     );
-                  }),
+                },
+              ),
             ),
             const SizedBox(height: 30),
             // TIPS & GUIDANCES
