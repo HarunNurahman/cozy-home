@@ -195,8 +195,8 @@ class DetailScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16),
                 child: Image.network(
                   item,
-                  width: 110,
-                  height: 88,
+                  width: 88,
+                  height: 110,
                   fit: BoxFit.cover,
                 ),
               ),

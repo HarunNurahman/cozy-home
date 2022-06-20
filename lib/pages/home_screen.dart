@@ -14,6 +14,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var spaceProvider = Provider.of<SpacesProvider>(context);
+
     return Scaffold(
       backgroundColor: whiteColor,
       body: SafeArea(
@@ -60,27 +61,27 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(height: 16),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: edge),
-              child: FutureBuilder<List<Spaces>>(
-                  future: spaceProvider.getRecommendedSpaces(),
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      List<Spaces> data = snapshot.data ?? [];
-                      int index = 0;
-                      return Column(
-                        children: data.map((item) {
-                          index++;
+              child: FutureBuilder<dynamic>(
+                future: spaceProvider.getRecommendedSpaces(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    List<Spaces> data = snapshot.data ?? [];
+                    int index = 0;
 
-                          return Container(
-                            margin: EdgeInsets.only(top: index == 1 ? 0 : 30),
-                            child: SpaceCard(item),
-                          );
-                        },
-                      ).toList(),
-                      );
-                    }
-                  return Center(
-                      child: CircularProgressIndicator(),
+                    return Column(
+                      children: data.map((item) {
+                        index++;
+
+                        return Container(
+                          margin: EdgeInsets.only(top: index == 1 ? 0 : 30),
+                          child: SpaceCard(item),
+                        );
+                      }).toList(),
                     );
+                  }
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
                 },
               ),
             ),
