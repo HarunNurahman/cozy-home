@@ -26,7 +26,12 @@ class SpaceCard extends StatelessWidget {
               height: 110,
               child: Stack(
                 children: [
-                  Image.asset(spaces.imageUrl),
+                  Image.network(
+                    spaces.imageUrl,
+                    width: 130,
+                    height: 110,
+                    fit: BoxFit.cover,
+                  ),
                   Align(
                     alignment: Alignment.topRight,
                     child: Container(

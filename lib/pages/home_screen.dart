@@ -2,17 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:kosan_apps/models/city.dart';
 import 'package:kosan_apps/models/spaces.dart';
 import 'package:kosan_apps/models/tips.dart';
+import 'package:kosan_apps/providers/spaces_provider.dart';
 import 'package:kosan_apps/themes.dart';
 import 'package:kosan_apps/widgets/bottom_navbar_item.dart';
 import 'package:kosan_apps/widgets/city_card.dart';
 import 'package:kosan_apps/widgets/space_card.dart';
 import 'package:kosan_apps/widgets/tips_card.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
+    var spaceProvider = Provider.of<SpacesProvider>(context);
     return Scaffold(
       backgroundColor: whiteColor,
       body: SafeArea(
@@ -57,7 +58,67 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16),
-            recommendedSpaces(),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: edge),
+              child: FutureBuilder<List<Spaces>>(
+                  future: spaceProvider.getRecommendedSpaces(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      List<Spaces> data = snapshot.data ?? [];
+                      int index = 0;
+                      return Column(
+                        children: data.map((item) {
+                          index++;
+
+                          return Container(
+                            margin: EdgeInsets.only(top: index == 1 ? 0 : 30),
+                            child: SpaceCard(item),
+                          );
+                        }).toList(),
+                        // children: [
+                        //   SpaceCard(
+                        //     Spaces(
+                        //       id: 1,
+                        //       rating: 4,
+                        //       price: 80,
+                        //       name: 'Kuretakeso Hott',
+                        //       imageUrl: 'assets/images/img_space_1.png',
+                        //       city: 'Kota Bandung',
+                        //       country: 'Indonesia',
+                        //     ),
+                        //   ),
+                        //   const SizedBox(height: 30),
+                        //   SpaceCard(
+                        //     Spaces(
+                        //       id: 2,
+                        //       rating: 4,
+                        //       price: 50,
+                        //       name: 'Roemah Nenek',
+                        //       imageUrl: 'assets/images/img_space_2.png',
+                        //       city: 'Yogyakarta',
+                        //       country: 'Indonesia',
+                        //     ),
+                        //   ),
+                        //   const SizedBox(height: 30),
+                        //   SpaceCard(
+                        //     Spaces(
+                        //       id: 3,
+                        //       rating: 3,
+                        //       price: 100,
+                        //       name: 'Darrling How',
+                        //       imageUrl: 'assets/images/img_space_3.png',
+                        //       city: 'Jakarta Selatan',
+                        //       country: 'Indonesia',
+                        //     ),
+                        //   ),
+                        // ],
+                      );
+                    }
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }),
+            ),
             const SizedBox(height: 30),
             // TIPS & GUIDANCES
             Padding(
@@ -131,51 +192,6 @@ class HomeScreen extends StatelessWidget {
               name: 'Civil Registration',
               update: '21/01/2022',
               imageUrl: 'assets/images/img_tips_2.png',
-            ),
-          ),
-        ],
-            ),
-    );
-  }
-
-  Padding recommendedSpaces() {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: edge),
-      child: Column(
-        children: [
-          SpaceCard(
-            Spaces(
-              id: 1,
-              rating: 4,
-              price: 80,
-              name: 'Kuretakeso Hott',
-              imageUrl: 'assets/images/img_space_1.png',
-              city: 'Kota Bandung',
-              country: 'Indonesia',
-            ),
-          ),
-          const SizedBox(height: 30),
-          SpaceCard(
-            Spaces(
-              id: 2,
-              rating: 4,
-              price: 50,
-              name: 'Roemah Nenek',
-              imageUrl: 'assets/images/img_space_2.png',
-              city: 'Yogyakarta',
-              country: 'Indonesia',
-            ),
-          ),
-          const SizedBox(height: 30),
-          SpaceCard(
-            Spaces(
-              id: 3,
-              rating: 3,
-              price: 100,
-              name: 'Darrling How',
-              imageUrl: 'assets/images/img_space_3.png',
-              city: 'Jakarta Selatan',
-              country: 'Indonesia',
             ),
           ),
         ],
