@@ -4,6 +4,7 @@ import 'package:kosan_apps/pages/error_screen.dart';
 import 'package:kosan_apps/themes.dart';
 import 'package:kosan_apps/widgets/facility_item.dart';
 import 'package:kosan_apps/widgets/list_photo.dart';
+import 'package:kosan_apps/widgets/rating_item.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
@@ -17,7 +18,6 @@ class DetailScreen extends StatelessWidget {
   final Spaces spaces;
 
   DetailScreen(this.spaces);
-  
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +36,7 @@ class DetailScreen extends StatelessWidget {
         );
       }
     }
+
     return Scaffold(
       backgroundColor: whiteColor,
       body: SafeArea(
@@ -269,38 +270,14 @@ class DetailScreen extends StatelessWidget {
               ),
             ],
           ),
+          // RATING
           Row(
-            children: [
-              Icon(
-                Icons.star,
-                color: orangeColor,
-                size: 20,
-              ),
-              const SizedBox(width: 2),
-              Icon(
-                Icons.star,
-                color: orangeColor,
-                size: 20,
-              ),
-              const SizedBox(width: 2),
-              Icon(
-                Icons.star,
-                color: orangeColor,
-                size: 20,
-              ),
-              const SizedBox(width: 2),
-              Icon(
-                Icons.star,
-                color: orangeColor,
-                size: 20,
-              ),
-              const SizedBox(width: 2),
-              const Icon(
-                Icons.star,
-                color: Color(0xFF989BA1),
-                size: 20,
-              ),
-            ],
+            children: [1, 2, 3, 4, 5].map((index) {
+              return Container(
+                margin: const EdgeInsets.only(left: 2),
+                child: RatingItem(index: index, rating: spaces.rating),
+              );
+            }).toList(),
           ),
         ],
       ),
