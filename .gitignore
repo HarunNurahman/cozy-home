@@ -47,3 +47,4 @@ app.*.map.json
 /android/app/release
 Cozy [Full Edition] Update.fig
 Cozy [Full Edition].fig
+android/app/google-services.json
