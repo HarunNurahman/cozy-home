@@ -17,9 +17,25 @@ class DetailScreen extends StatelessWidget {
   final Spaces spaces;
 
   DetailScreen(this.spaces);
+  
 
   @override
   Widget build(BuildContext context) {
+    _launchUrl(String url) async {
+      // if (!await launchUrlString(url)) throw 'Could not launch $url';
+      if (await canLaunchUrlString(url)) {
+        launchUrlString(url);
+      } else {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return EmptyState();
+            },
+          ),
+        );
+      }
+    }
     return Scaffold(
       backgroundColor: whiteColor,
       body: SafeArea(
@@ -85,7 +101,9 @@ class DetailScreen extends StatelessWidget {
                           height: 50,
                           width: MediaQuery.of(context).size.width - (2 * edge),
                           child: ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              _launchUrl('tel:${spaces.phone}');
+                            },
                             style: ElevatedButton.styleFrom(
                               primary: purpleColor,
                               shape: RoundedRectangleBorder(
