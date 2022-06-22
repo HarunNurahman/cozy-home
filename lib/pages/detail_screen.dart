@@ -39,7 +39,7 @@ class DetailScreen extends StatelessWidget {
                   Container(
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.vertical(
+                      borderRadius: const BorderRadius.vertical(
                         top: Radius.circular(20),
                       ),
                       color: whiteColor,
@@ -167,11 +167,11 @@ class DetailScreen extends StatelessWidget {
             child: Container(
               width: 40,
               height: 40,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Color(0xFFF6F7F8),
                 shape: BoxShape.circle,
               ),
-              child: Icon(
+              child: const Icon(
                 Icons.location_on,
                 size: 22,
                 color: Color(0xFF989BA1),
