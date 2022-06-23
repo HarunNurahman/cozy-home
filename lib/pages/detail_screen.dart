@@ -8,7 +8,7 @@ import 'package:kosan_apps/widgets/rating_item.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
-class DetailScreen extends StatelessWidget {
+class DetailScreen extends StatefulWidget {
   // final Uri _url = Uri.parse('https://goo.gl/maps/y1UeZFGt4wY4Enpu6');
 
   // void _launchUrl() async {
@@ -19,6 +19,12 @@ class DetailScreen extends StatelessWidget {
 
   DetailScreen(this.spaces);
 
+  @override
+  State<DetailScreen> createState() => _DetailScreenState();
+}
+
+class _DetailScreenState extends State<DetailScreen> {
+  bool isClicked = false;
   @override
   Widget build(BuildContext context) {
     _launchUrl(String url) async {
@@ -44,7 +50,7 @@ class DetailScreen extends StatelessWidget {
         child: Stack(
           children: [
             Image.network(
-              spaces.imageUrl,
+              widget.spaces.imageUrl,
               height: 350,
               width: MediaQuery.of(context).size.width,
               fit: BoxFit.cover,
@@ -103,7 +109,66 @@ class DetailScreen extends StatelessWidget {
                           width: MediaQuery.of(context).size.width - (2 * edge),
                           child: ElevatedButton(
                             onPressed: () {
-                              _launchUrl('tel:${spaces.phone}');
+                              showModalBottomSheet(
+                                context: context,
+                                builder: (context) {
+                                  return Container(
+                                    padding: const EdgeInsets.symmetric(
+                                      vertical: 50,
+                                    ),
+                                    height: 290,
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          'Hubungi Pemilik Kost',
+                                          style: regularTextStyle.copyWith(
+                                            fontSize: 20,
+                                          ),
+                                        ),
+                                        const SizedBox(height: 12),
+                                        Text(
+                                          'Apakah anda yakin ingin menghubungi pemilik kost?',
+                                          style: greyTextStyle.copyWith(
+                                            fontSize: 16,
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                        const SizedBox(height: 30),
+                                        Container(
+                                          width: 225,
+                                          height: 55,
+                                          child: ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                              primary: purpleColor,
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(17),
+                                              ),
+                                            ),
+                                            onPressed: () {
+                                              _launchUrl(
+                                                'tel:${widget.spaces.phone}',
+                                              );
+                                            },
+                                            child: Text(
+                                              'Lanjutkan',
+                                              style: TextStyle(
+                                                fontSize: 18,
+                                                color: whiteColor,
+                                              ),
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  );
+                                },
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.vertical(
+                                    top: Radius.circular(25),
+                                  ),
+                                ),
+                              );
                             },
                             style: ElevatedButton.styleFrom(
                               primary: purpleColor,
@@ -144,9 +209,18 @@ class DetailScreen extends StatelessWidget {
               width: 40,
             ),
           ),
-          Image.asset(
-            'assets/images/btn_wishlist.png',
-            width: 40,
+          InkWell(
+            onTap: () {
+              setState(() {
+                isClicked = !isClicked;
+              });
+            },
+            child: Image.asset(
+              isClicked
+                  ? 'assets/images/btn_wishlist_on.png'
+                  : 'assets/images/btn_wishlist.png',
+              width: 40,
+            ),
           ),
         ],
       ),
@@ -176,12 +250,12 @@ class DetailScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            '${spaces.address}\n${spaces.city}',
+            '${widget.spaces.address}\n${widget.spaces.city}',
             style: greyTextStyle.copyWith(fontSize: 14),
           ),
           InkWell(
             onTap: () {
-              _launchUrl(spaces.mapUrl);
+              _launchUrl(widget.spaces.mapUrl);
             },
             child: Container(
               width: 40,
@@ -206,7 +280,7 @@ class DetailScreen extends StatelessWidget {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
-        children: spaces.photos.map((item) {
+        children: widget.spaces.photos.map((item) {
           return Container(
             margin: EdgeInsets.only(left: edge),
             child: ClipRRect(
@@ -246,13 +320,13 @@ class DetailScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                spaces.name,
+                widget.spaces.name,
                 style: blackTextStyle.copyWith(fontSize: 20),
               ),
               const SizedBox(height: 2),
               RichText(
                 text: TextSpan(
-                  text: '\$${spaces.price}',
+                  text: '\$${widget.spaces.price}',
                   style: purpleTextStyle.copyWith(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
@@ -275,7 +349,7 @@ class DetailScreen extends StatelessWidget {
             children: [1, 2, 3, 4, 5].map((index) {
               return Container(
                 margin: const EdgeInsets.only(left: 2),
-                child: RatingItem(index: index, rating: spaces.rating),
+                child: RatingItem(index: index, rating: widget.spaces.rating),
               );
             }).toList(),
           ),
@@ -294,19 +368,19 @@ class DetailScreen extends StatelessWidget {
             FacilityItem(
               name: 'Kitchens',
               imageUrl: 'assets/icons/ic_kitchenbar.png',
-              total: spaces.numberOfKitchens.toString(),
+              total: widget.spaces.numberOfKitchens.toString(),
             ),
             const SizedBox(width: 30),
             FacilityItem(
               name: 'Bedrooms',
               imageUrl: 'assets/icons/ic_bedroom.png',
-              total: spaces.numberOfBedrooms.toString(),
+              total: widget.spaces.numberOfBedrooms.toString(),
             ),
             const SizedBox(width: 30),
             FacilityItem(
               name: 'Wardrobes',
               imageUrl: 'assets/icons/ic_wardrobe.png',
-              total: spaces.numberOfCupboards.toString(),
+              total: widget.spaces.numberOfCupboards.toString(),
             ),
             const SizedBox(width: 30),
           ],
