@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.kosan_apps">
    <application
-        android:label="kosan_apps"
+        android:label="Cozy Kost"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
